@@ -3,53 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Forum 2025</title>
+    <title>軟體工程論壇 2025</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>AI Forum 2025 人工智慧論壇</h1>
-        <p class="date">日期：2025 年 12 月 9 日 | 地點：逢甲大學V015教室</p>
+    <!-- 頁首 -->
+    <header class="site-header">
+        <div class="header-inner">
+            <h1 class="site-title">軟體工程論壇 2025</h1>
+            <p class="site-subtitle">人工智慧如何改變軟體開發流程與工程實踐</p>
+            <p class="site-meta">日期：2025 年 12 月 9 日　｜　地點：逢甲大學 V015 教室</p>
+        </div>
     </header>
 
-    <section class="theme">
-        <h2>論壇主題</h2>
-        <p>「Agentic AI 時代：智慧計算、生成式 AI 與自主智能體的發展與應用」</p>
-    </section>
+    <main>
+        <!-- 論壇簡介 -->
+        <section class="section section-hero">
+            <h2>論壇簡介</h2>
+            <p>
+                本次軟體工程論壇以「人工智慧如何改變軟體開發流程與工程實踐」為主題，
+                由修課同學擔任受邀講者，從開發流程、程式碼品質、測試與 DevOps、人機協作與倫理等不同面向，
+                一起探索 AI 對現代軟體工程帶來的影響與挑戰。
+            </p>
+        </section>
 
-    <section class="intro">
-        <h2>簡介</h2>
-        <p>AI Forum 是台灣人工智慧領域一年一度的頂尖盛會，連結學術界與產業界，促進合作與創新。</p>
-    </section>
+        <!-- 主題說明 -->
+        <section class="section section-theme">
+            <h2>論壇主題</h2>
+            <p class="theme-title">人工智慧如何改變軟體開發流程與工程實踐</p>
+            <ul class="theme-points">
+                <li>AI 輔助程式開發與程式碼品質</li>
+                <li>AI 在軟體測試、品質保證與 DevOps 的角色</li>
+                <li>AI 介入軟體工程生命週期各階段</li>
+                <li>有 AI 的時代的工程師技能與倫理議題</li>
+            </ul>
+        </section>
 
-    <section class="activities">
-        <h2>特色活動</h2>
-        <ul>
-            <li>國內青年學者分享研究成果</li>
-        </ul>
-    </section>  
+        <!-- 演講者 -->
+        <section class="section section-speakers">
+            <h2>受邀演講者（Invited Speakers）</h2>
+            <p class="section-description">點選下方任一演講者卡片，可在下方區域預覽該講者的簡報。</p>
 
-    <section class="speakers">
-        <h2>Invited Speakers</h2>
-        <p style="white-space: pre;"><strong>                 梁祐嘉                                          陳冠閔</strong><p>
-        <img src="picture/picture1.jpg" alt="picture1" width="200">
-</section>
+            <div class="speaker-grid">
+                <!-- Speaker 1 -->
+                <article class="speaker-card"
+                         data-slide-src="slides/speaker1.pdf"
+                         data-download-src="slides/speaker1.pptx"
+                         data-speaker-name="蔡明憲"
+                         data-speaker-topic="AI 與軟體工程整體趨勢">
+                    <div class="speaker-photo-wrapper">
+                        <img src="images/speaker1.jpg" alt="蔡明憲_照片" class="speaker-photo">
+                    </div>
+                    <h3 class="speaker-name">蔡明憲</h3>
+                    <p class="speaker-topic">AI × 軟體工程全貌</p>
+                </article>
 
-    </section>
+                <!-- Speaker 2 -->
+                <article class="speaker-card"
+                         data-slide-src="slides/speaker2.pdf"
+                         data-download-src="slides/speaker2.pptx"
+                         data-speaker-name="陳冠閔"
+                         data-speaker-topic="AI 輔助程式開發">
+                    <div class="speaker-photo-wrapper">
+                        <img src="images/speaker2.jpg" alt="陳冠閔_照片" class="speaker-photo">
+                    </div>
+                    <h3 class="speaker-name">陳冠閔</h3>
+                    <p class="speaker-topic">AI 寫程式與程式碼品質</p>
+                </article>
+                <!---->
 
-    <section class="organizers">
-        <h2>主辦單位</h2>
-        <p>逢甲大學高等軟體工程課程</p>
-        <h2>協辦單位</h2>
-        <p>逢甲大學資訊系</p>
-        <img src="https://mukicorp.com/assets/images/customized/logo/fcu.png" alt="圖片" width="200">
-    </section>
+                <article class="speaker-card"
+                         data-slide-src="slides/speaker3.pdf"
+                         data-download-src="slides/speaker3.pptx"
+                         data-speaker-name="粱祐嘉"
+                         data-speaker-topic="AI 測試與 DevOps">
+                    <div class="speaker-photo-wrapper">
+                        <img src="images/speaker3.jpg" alt="粱祐嘉_照片" class="speaker-photo contain-photo">
+                    </div>
+                    <h3 class="speaker-name">粱祐嘉</h3>
+                    <p class="speaker-topic">AI 在測試與 DevOps 中的應用</p>
+                </article>
 
-    <footer>
+                <!-- Speaker 4 -->
+                <article class="speaker-card"
+                         data-slide-src="slides/speaker4.pdf"
+                         data-download-src="slides/speaker4.pptx"
+                         data-speaker-name="張牧翔"
+                         data-speaker-topic="人機協作與倫理">
+                    <div class="speaker-photo-wrapper">
+                        <img src="images/speaker4.jpg" alt="張牧翔_照片" class="speaker-photo">
+                    </div>
+                    <h3 class="speaker-name">張牧翔</h3>
+                    <p class="speaker-topic">AI 時代的工程師新角色</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- 簡報預覽 + 下載 -->
+        <section class="section section-slides">
+            <h2>簡報預覽</h2>
+
+            <div class="slides-info">
+                <p class="slides-speaker">
+                    目前選擇的講者：<span id="currentSpeakerName">請先點選上方任一演講者</span>
+                </p>
+                <p class="slides-topic">
+                    主題：<span id="currentSpeakerTopic">尚未選擇</span>
+                </p>
+            </div>
+
+            <div class="slides-frame-wrapper">
+                <iframe id="slidesFrame"
+                        src="slides/sample.pdf"
+                        title="簡報預覽"
+                        loading="lazy">
+                </iframe>
+                <div class="slides-actions">
+                    <!-- 預設先指向 sample.pdf，會在點講者時被 JS 更新 -->
+                    <a id="downloadLink"
+                       href="slides/sample.pdf"
+                       target="_blank"
+                       class="btn-download">
+                        ⬇ 開啟目前講者簡報
+                    </a>
+                </div>
+                <p class="slides-hint">
+                    若無法顯示簡報，請確認瀏覽器是否支援 PDF 預覽，
+                    或使用上方按鈕直接下載簡報檔案。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2025 軟體工程論壇（課程期末報告）</p>
     </footer>
+
+    <!-- 切換演講者 & 更新簡報 / 下載連結 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".speaker-card");
+            const frame = document.getElementById("slidesFrame");
+            const nameSpan = document.getElementById("currentSpeakerName");
+            const topicSpan = document.getElementById("currentSpeakerTopic");
+            const downloadLink = document.getElementById("downloadLink");
+
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+
+                    cards.forEach(c => c.classList.remove("active"));
+                    card.classList.add("active");
+
+                    const slideSrc = card.dataset.slideSrc;          // PDF
+                    const dlSrc = card.dataset.downloadSrc;          // PPTX 或 空字串
+                    const speakerName = card.dataset.speakerName;
+                    const speakerTopic = card.dataset.speakerTopic;
+
+                    // 更新 PDF 預覽
+                    frame.src = slideSrc;
+
+                    // 更新詳細資訊
+                    nameSpan.textContent = speakerName;
+                    topicSpan.textContent = speakerTopic;
+
+                    // ⚡ 自動判斷下載來源
+                    if (dlSrc && dlSrc.trim() !== "") {
+                        // 有 PPTX → 下載 PPTX
+                        downloadLink.href = dlSrc;
+                        downloadLink.download = speakerName.replace(/\s+/g, "_") + ".pptx";
+                        downloadLink.textContent = "⬇ 下載簡報 (PPTX)";
+                    } else {
+                        // 沒有 PPTX → 改下載 PDF
+                        downloadLink.href = slideSrc;
+                        downloadLink.download = speakerName.replace(/\s+/g, "_") + ".pdf";
+                        downloadLink.textContent = "⬇ 下載簡報 (PDF)";
+                    }
+                });
+            });
+
+            // 預設選第一位講者
+            if (cards.length > 0) {
+                cards[0].click();
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
