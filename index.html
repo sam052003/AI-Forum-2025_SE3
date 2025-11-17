@@ -148,36 +148,51 @@
             const topicSpan = document.getElementById("currentSpeakerTopic");
             const downloadLink = document.getElementById("downloadLink");
 
+            // 從路徑裡取出檔名，例如 "slides/speaker1.pptx" -> "speaker1.pptx"
+            function getFileName(path) {
+                if (!path) return "";
+                const parts = path.split("/");
+                return parts[parts.length - 1];
+            }
+
+            // 取副檔名顯示用（PPTX / PDF）
+            function getExt(path) {
+                const fileName = getFileName(path);
+                const dotIndex = fileName.lastIndexOf(".");
+                if (dotIndex === -1) return "";
+                return fileName.substring(dotIndex + 1).toUpperCase();
+            }
+
             cards.forEach(card => {
                 card.addEventListener("click", () => {
 
                     cards.forEach(c => c.classList.remove("active"));
                     card.classList.add("active");
 
-                    const slideSrc = card.dataset.slideSrc;          // PDF
-                    const dlSrc = card.dataset.downloadSrc;          // PPTX 或 空字串
+                    const slideSrc = card.dataset.slideSrc;   // PDF
+                    const dlSrc = card.dataset.downloadSrc;   // PPTX 或 空字串
                     const speakerName = card.dataset.speakerName;
                     const speakerTopic = card.dataset.speakerTopic;
 
                     // 更新 PDF 預覽
                     frame.src = slideSrc;
 
-                    // 更新詳細資訊
+                    // 更新文字資訊
                     nameSpan.textContent = speakerName;
                     topicSpan.textContent = speakerTopic;
 
-                    // ⚡ 自動判斷下載來源
+                    // ⚡ 自動判斷下載來源（但檔名用原始檔名，如 speaker1.pptx）
+                    let hrefToUse = slideSrc; // 預設用 PDF
                     if (dlSrc && dlSrc.trim() !== "") {
-                        // 有 PPTX → 下載 PPTX
-                        downloadLink.href = dlSrc;
-                        downloadLink.download = speakerName.replace(/\s+/g, "_") + ".pptx";
-                        downloadLink.textContent = "⬇ 下載簡報 (PPTX)";
-                    } else {
-                        // 沒有 PPTX → 改下載 PDF
-                        downloadLink.href = slideSrc;
-                        downloadLink.download = speakerName.replace(/\s+/g, "_") + ".pdf";
-                        downloadLink.textContent = "⬇ 下載簡報 (PDF)";
+                        hrefToUse = dlSrc;    // 若有 PPTX 則改用 PPTX
                     }
+
+                    const fileName = getFileName(hrefToUse);
+                    const ext = getExt(hrefToUse);
+
+                    downloadLink.href = hrefToUse;
+                    downloadLink.download = fileName; // 這裡就是 speaker1.pptx / speaker1.pdf
+                    downloadLink.textContent = `⬇ 下載簡報 (${ext})`;
                 });
             });
 
