@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build outputs
+bin/
+obj/
+
+# Publish profiles
+*.pubxml
+*.pubxml.user
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store
