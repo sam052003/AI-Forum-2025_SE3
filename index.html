@@ -42,11 +42,12 @@
         <!-- 演講者 -->
         <section class="section section-speakers">
             <h2>受邀演講者（Invited Speakers）</h2>
-            <p class="section-description">點選下方任一演講者卡片，可在下方區域預覽該講者的簡報。</p>
+            <p class="section-description">點選下方任一演講者卡片，可在下方區域預覽與下載該講者的簡報，並查看其參考文獻。</p>
 
             <div class="speaker-grid">
                 <!-- Speaker 1 -->
                 <article class="speaker-card"
+                         data-speaker-id="1"
                          data-slide-src="slides/speaker1.pdf"
                          data-download-src="slides/speaker1.pptx"
                          data-speaker-name="蔡明憲"
@@ -60,6 +61,7 @@
 
                 <!-- Speaker 2 -->
                 <article class="speaker-card"
+                         data-speaker-id="2"
                          data-slide-src="slides/speaker2.pdf"
                          data-download-src="slides/speaker2.pptx"
                          data-speaker-name="陳冠閔"
@@ -73,6 +75,7 @@
                 <!---->
 
                 <article class="speaker-card"
+                         data-speaker-id="3"
                          data-slide-src="slides/speaker3.pdf"
                          data-download-src="slides/speaker3.pptx"
                          data-speaker-name="粱祐嘉"
@@ -86,6 +89,7 @@
 
                 <!-- Speaker 4 -->
                 <article class="speaker-card"
+                         data-speaker-id="4"
                          data-slide-src="slides/speaker4.pdf"
                          data-download-src="slides/speaker4.pptx"
                          data-speaker-name="張牧翔"
@@ -99,7 +103,7 @@
             </div>
         </section>
 
-        <!-- 簡報預覽 + 下載 -->
+        <!-- 簡報預覽 + 下載 + 參考文獻 -->
         <section class="section section-slides">
             <h2>簡報預覽</h2>
 
@@ -124,13 +128,32 @@
                        href="slides/sample.pdf"
                        target="_blank"
                        class="btn-download">
-                        ⬇ 開啟目前講者簡報
+                        ⬇ 下載簡報
                     </a>
                 </div>
                 <p class="slides-hint">
                     若無法顯示簡報，請確認瀏覽器是否支援 PDF 預覽，
-                    或使用上方按鈕直接下載簡報檔案。
+                    或使用上方按鈕下載簡報檔案。
                 </p>
+            </div>
+
+            <!-- 動態顯示：目前講者的參考文獻 -->
+            <div class="section-current-refs">
+                <h3>本場次參考文獻</h3>
+                <ol id="currentReferences" class="refs-list">
+                    <!-- 由 JavaScript 動態填入 -->
+                </ol>
+            </div>
+        </section>
+
+        <!-- 全部參考文獻區 -->
+        <section class="section section-all-refs">
+            <h2>全部參考文獻</h2>
+            <p class="section-description">
+                整理本次四位講者報告所使用之主要參考文獻，依講者分組列出。
+            </p>
+            <div id="allReferencesContainer" class="all-refs-grid">
+                <!-- 由 JavaScript 動態建立 -->
             </div>
         </section>
     </main>
@@ -139,7 +162,7 @@
         <p>© 2025 軟體工程論壇（課程期末報告）</p>
     </footer>
 
-    <!-- 切換演講者 & 更新簡報 / 下載連結 -->
+    <!-- 切換演講者 & 更新簡報 / 下載連結 & 參考文獻 -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const cards = document.querySelectorAll(".speaker-card");
@@ -147,6 +170,28 @@
             const nameSpan = document.getElementById("currentSpeakerName");
             const topicSpan = document.getElementById("currentSpeakerTopic");
             const downloadLink = document.getElementById("downloadLink");
+            const currentRefsList = document.getElementById("currentReferences");
+            const allRefsContainer = document.getElementById("allReferencesContainer");
+
+            // 這裡設定每位講者的參考文獻內容（你可以依實際需要修改文字）
+            const referencesBySpeaker = {
+                "1": [
+                    "Hazrina, S. et al., “Systematic Mapping: Artificial Intelligence Techniques in Software Engineering,” IEEE Access, 2022.",
+                    "Hou, X. et al., “Large Language Models for Software Engineering: A Systematic Literature Review,” 2023."
+                ],
+                "2": [
+                    "Kalliamvakou, E. et al., “Measuring GitHub Copilot’s Impact on Productivity,” Communications of the ACM, 2024.",
+                    "Vaithilingam, P. et al., “On the Use of AI Assistants for Code Generation: Opportunities and Risks,” ACM CHI, 2022."
+                ],
+                "3": [
+                    "Sharma, S. K., “Application of Artificial Intelligence in Software Testing,” IEEE SMART, 2021.",
+                    "Schieferdecker, I. K., “A Taxonomy for AI-Augmented Software Testing,” 2025."
+                ],
+                "4": [
+                    "Becker, B. A. et al., “Computing Education in the Era of Generative AI,” Communications of the ACM, 2024.",
+                    "ACM/IEEE-CS, “Software Engineering Code of Ethics and Professional Practice,” Version 5.2."
+                ]
+            };
 
             // 從路徑裡取出檔名，例如 "slides/speaker1.pptx" -> "speaker1.pptx"
             function getFileName(path) {
@@ -163,9 +208,66 @@
                 return fileName.substring(dotIndex + 1).toUpperCase();
             }
 
+            // 更新「本場次參考文獻」列表
+            function updateCurrentReferences(speakerId) {
+                currentRefsList.innerHTML = "";
+                const refs = referencesBySpeaker[speakerId] || [];
+                if (refs.length === 0) {
+                    const li = document.createElement("li");
+                    li.textContent = "（本場次未提供參考文獻）";
+                    currentRefsList.appendChild(li);
+                    return;
+                }
+                refs.forEach(text => {
+                    const li = document.createElement("li");
+                    li.textContent = text;
+                    currentRefsList.appendChild(li);
+                });
+            }
+
+            // 建立「全部參考文獻」區塊
+            function buildAllReferences() {
+                allRefsContainer.innerHTML = "";
+
+                cards.forEach(card => {
+                    const speakerId = card.dataset.speakerId;
+                    const speakerName = card.dataset.speakerName;
+                    const speakerTopic = card.dataset.speakerTopic;
+                    const refs = referencesBySpeaker[speakerId] || [];
+
+                    const block = document.createElement("div");
+                    block.className = "refs-block";
+
+                    const title = document.createElement("h3");
+                    title.textContent = `${speakerName}：${speakerTopic}`;
+                    block.appendChild(title);
+
+                    const ol = document.createElement("ol");
+                    ol.className = "refs-list";
+
+                    if (refs.length === 0) {
+                        const li = document.createElement("li");
+                        li.textContent = "（未提供參考文獻）";
+                        ol.appendChild(li);
+                    } else {
+                        refs.forEach(text => {
+                            const li = document.createElement("li");
+                            li.textContent = text;
+                            ol.appendChild(li);
+                        });
+                    }
+
+                    block.appendChild(ol);
+                    allRefsContainer.appendChild(block);
+                });
+            }
+
+            // 初始化：建立底部所有參考文獻
+            buildAllReferences();
+
+            // 點選講者卡片：更新簡報 / 下載鈕 / 參考文獻
             cards.forEach(card => {
                 card.addEventListener("click", () => {
-
                     cards.forEach(c => c.classList.remove("active"));
                     card.classList.add("active");
 
@@ -173,6 +275,7 @@
                     const dlSrc = card.dataset.downloadSrc;   // PPTX 或 空字串
                     const speakerName = card.dataset.speakerName;
                     const speakerTopic = card.dataset.speakerTopic;
+                    const speakerId = card.dataset.speakerId;
 
                     // 更新 PDF 預覽
                     frame.src = slideSrc;
@@ -181,7 +284,7 @@
                     nameSpan.textContent = speakerName;
                     topicSpan.textContent = speakerTopic;
 
-                    // ⚡ 自動判斷下載來源（但檔名用原始檔名，如 speaker1.pptx）
+                    // 決定下載 hyperlink：若有 PPTX 就下載 PPTX，否則下載 PDF
                     let hrefToUse = slideSrc; // 預設用 PDF
                     if (dlSrc && dlSrc.trim() !== "") {
                         hrefToUse = dlSrc;    // 若有 PPTX 則改用 PPTX
@@ -193,6 +296,9 @@
                     downloadLink.href = hrefToUse;
                     downloadLink.download = fileName; // 這裡就是 speaker1.pptx / speaker1.pdf
                     downloadLink.textContent = `⬇ 下載簡報 (${ext})`;
+
+                    // 更新「本場次參考文獻」
+                    updateCurrentReferences(speakerId);
                 });
             });
 
