@@ -13,6 +13,16 @@
             <h1 class="site-title">軟體工程論壇 2025</h1>
             <p class="site-subtitle">人工智慧如何改變軟體開發流程與工程實踐</p>
             <p class="site-meta">日期：2025 年 12 月 9 日　｜　地點：逢甲大學 V015 教室</p>
+
+            <!-- NotebookLM 連結 -->
+            <p class="site-notebooklm">
+                NotebookLM（論文與摘要）：
+                <a href="https://notebooklm.google.com/notebook/3f350856-bce0-4d84-a8e1-97c5cd41e84f"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    點我前往
+                </a>
+            </p>
         </div>
     </header>
 
@@ -59,13 +69,15 @@
                     <p class="speaker-topic">AI × 軟體工程全貌</p>
                 </article>
 
-                <!-- Speaker 2 -->
+                <!-- Speaker 2（有 Google 表單 + QRCode） -->
                 <article class="speaker-card"
                          data-speaker-id="2"
                          data-slide-src="slides/speaker2.pdf"
                          data-download-src="slides/speaker2.pptx"
                          data-speaker-name="陳冠閔"
-                         data-speaker-topic="AI 輔助程式開發">
+                         data-speaker-topic="AI 輔助程式開發"
+                         data-form-url="https://forms.gle/xfHUTgXBnCTBfmcG6"
+                         data-form-qr="images/speaker2_form_qr.png">
                     <div class="speaker-photo-wrapper">
                         <img src="images/speaker2.jpg" alt="陳冠閔_照片" class="speaker-photo">
                     </div>
@@ -114,6 +126,33 @@
                 <p class="slides-topic">
                     主題：<span id="currentSpeakerTopic">尚未選擇</span>
                 </p>
+            </div>
+
+            <!-- 第二位講者：表單連結 + QRCode（預設隱藏，點到第二位講者才顯示） -->
+            <div id="speakerFormPanel" class="speaker-form-panel" hidden>
+                <h3 class="speaker-form-title">報告前請先填寫表單</h3>
+
+                <div class="speaker-form-content">
+                    <div class="speaker-form-left">
+                        <p class="speaker-form-desc">
+                            請使用下方連結或掃描 QR Code 進入 Google 表單填寫。
+                        </p>
+                        <a id="speakerFormLink"
+                           class="btn-form"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            📝 前往 Google 表單
+                        </a>
+                    </div>
+
+                    <div class="speaker-form-right">
+                        <img id="speakerFormQr"
+                             class="speaker-form-qr"
+                             src=""
+                             alt="Google 表單 QR Code">
+                    </div>
+                </div>
             </div>
 
             <div class="slides-frame-wrapper">
@@ -173,7 +212,12 @@
             const currentRefsList = document.getElementById("currentReferences");
             const allRefsContainer = document.getElementById("allReferencesContainer");
 
-            // 這裡設定每位講者的參考文獻內容（你可以依實際需要修改文字）
+            // 第二位講者表單區
+            const formPanel = document.getElementById("speakerFormPanel");
+            const formLink = document.getElementById("speakerFormLink");
+            const formQr = document.getElementById("speakerFormQr");
+
+            // 這裡設定每位講者的參考文獻內容
             const referencesBySpeaker = {
                 "1": [
                     "Nguyen‐Duc, A., Cabrero‐Daniel, B., Przybylek, A., Arora, C., Khanna, D., Herda, T., ... & Abrahamsson, P. (2025). Generative artificial intelligence for software engineering—A research agenda. Software: Practice and Experience, 55(11), 1806-1843.",
@@ -264,7 +308,7 @@
             // 初始化：建立底部所有參考文獻
             buildAllReferences();
 
-            // 點選講者卡片：更新簡報 / 下載鈕 / 參考文獻
+            // 點選講者卡片：更新簡報 / 下載鈕 / 參考文獻 + 表單區
             cards.forEach(card => {
                 card.addEventListener("click", () => {
                     cards.forEach(c => c.classList.remove("active"));
@@ -298,6 +342,25 @@
 
                     // 更新「本場次參考文獻」
                     updateCurrentReferences(speakerId);
+
+                    // === 顯示/隱藏 Google 表單區（只有 speaker 2 有 data-form-url 才會顯示）===
+                    const formUrl = card.dataset.formUrl;
+                    const formQrSrc = card.dataset.formQr;
+
+                    if (formUrl && formUrl.trim() !== "") {
+                        formPanel.hidden = false;
+                        formLink.href = formUrl;
+
+                        if (formQrSrc && formQrSrc.trim() !== "") {
+                            formQr.src = formQrSrc;
+                            formQr.style.display = "";
+                        } else {
+                            formQr.src = "";
+                            formQr.style.display = "none";
+                        }
+                    } else {
+                        formPanel.hidden = true;
+                    }
                 });
             });
 

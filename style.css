@@ -56,6 +56,23 @@ body {
     opacity: 0.9;
 }
 
+/* NotebookLM 連結 */
+.site-notebooklm {
+    margin: 10px 0 0;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+.site-notebooklm a {
+    color: #ffedc2;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.site-notebooklm a:hover {
+    text-decoration: none;
+}
+
 /* 主要內容區域 */
 
 main {
@@ -74,16 +91,16 @@ main {
     margin-top: 18px;
 }
 
-    .section h2 {
-        margin-top: 0;
-        margin-bottom: 12px;
-        color: var(--primary);
-        font-size: 1.35rem;
-    }
+.section h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--primary);
+    font-size: 1.35rem;
+}
 
-    .section p {
-        margin: 6px 0;
-    }
+.section p {
+    margin: 6px 0;
+}
 
 /* Hero / 簡介 */
 
@@ -134,16 +151,16 @@ main {
     align-items: center;
 }
 
-    .speaker-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
-        border-color: var(--primary);
-    }
+.speaker-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+    border-color: var(--primary);
+}
 
-    .speaker-card.active {
-        border-color: var(--primary);
-        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.18);
-    }
+.speaker-card.active {
+    border-color: var(--primary);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.18);
+}
 
 .speaker-photo-wrapper {
     width: 110px;
@@ -246,6 +263,66 @@ main {
     box-shadow: 0 3px 8px rgba(30, 64, 175, 0.35);
 }
 
+/* 第二位講者表單區塊 */
+.speaker-form-panel {
+    margin-top: 12px;
+    padding: 14px 14px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background: #fff7ed; /* 淡橘底：提醒用 */
+}
+
+.speaker-form-title {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    color: #9a3412; /* 深橘 */
+    font-weight: 700;
+}
+
+.speaker-form-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.speaker-form-desc {
+    margin: 0 0 10px;
+    color: #7c2d12;
+    font-size: 0.95rem;
+}
+
+.btn-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #fb923c;
+    color: #1f2937;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 10px rgba(251, 146, 60, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-form:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(251, 146, 60, 0.32);
+}
+
+.speaker-form-qr {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    padding: 6px;
+}
+
 /* 單一講者參考文獻區塊 */
 
 .section-current-refs {
@@ -346,5 +423,16 @@ main {
 
     .all-refs-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* 手機時表單區上下排 */
+    .speaker-form-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .speaker-form-right {
+        display: flex;
+        justify-content: center;
     }
 }
